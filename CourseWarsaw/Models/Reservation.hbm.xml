@@ -2,16 +2,15 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
 				   assembly="CourseWarsaw"
 				   namespace="CourseWarsaw.Models">
-	<class name="Table"
-		   table="Tables">
+	<class name="Reservation"
+		   table="Reservations">
 		<id name="Id">
 			<generator class="identity"/>
 		</id>
-		<property name="Priority"/>
-		<property name="Occupancy"/>
-		<set name="Reservations" table="TablesReservations">
-			<key column="TableId"/>
-			<many-to-many class="Reservation" column="ReservationId"/>
-		</set>
+		<property name="PeopleCount"/>
+		<property name="Name"/>
+		<property name="From" column="`From`"/>
+		<property name="To" column="`To`"/>
+		<many-to-one name="Table" column="`Table`"/>
 	</class>
 </hibernate-mapping>
