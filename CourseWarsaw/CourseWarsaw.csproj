@@ -72,10 +72,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\NHibernateController.cs" />
-    <Compile Include="Controllers\WaitersController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Table.cs" />
     <Compile Include="Models\Waiter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,6 +84,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <EmbeddedResource Include="Models\Waiter.hbm.xml" />
+    <EmbeddedResource Include="Models\Table.hbm.xml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
