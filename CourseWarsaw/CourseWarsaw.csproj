@@ -73,6 +73,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\StayOffMyLawn.cs" />
     <Compile Include="Infrastructure\Versioned.cs" />
     <Compile Include="Models\Animal.cs" />
     <Compile Include="Models\Reservation.cs" />

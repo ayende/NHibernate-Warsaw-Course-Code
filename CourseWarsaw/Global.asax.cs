@@ -3,6 +3,7 @@ using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using CourseWarsaw.Infrastructure;
 using CourseWarsaw.Models;
 using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NHibernate;
@@ -41,6 +42,7 @@ namespace CourseWarsaw
 			NHibernateProfiler.Initialize();
 
 			var configuration = new Configuration()
+				.SetNamingStrategy(new StayOffMyLawn())
 				.SetProperty(NHibernate.Cfg.Environment.Hbm2ddlAuto, "update")
 				.SetProperty(NHibernate.Cfg.Environment.Dialect, typeof(MsSql2008Dialect).AssemblyQualifiedName)
 				.DataBaseIntegration(properties =>
