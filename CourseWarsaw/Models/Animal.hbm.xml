@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+				   assembly="CourseWarsaw"
+				   namespace="CourseWarsaw.Models">
+	
+	<class name="Animal" abstract="true">
+		<id name="Id">
+			<generator class="hilo"/>
+		</id>
+		<property name="AllowInResturant"/>
+
+		<union-subclass name="Dog" table="Dogs">
+			<property name="Bark"/>
+		</union-subclass>
+		<union-subclass name="Cat" table="Cats">
+			<property name="LastHairBall"/>
+		</union-subclass>
+	</class>
+
+
+	<!--<class name="Animal" table="Animals" >
+		<id name="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="AllowInResturant"/>
+
+		<joined-subclass name="Dog" table="Dogs">
+			<key column="Id"/>
+			<property name="Bark"/>
+		</joined-subclass>
+		<joined-subclass name="Cat" table="Cats">
+			<key column="Id"/>
+			<property name="LastHairBall"/>
+		</joined-subclass>
+	</class>-->
+
+	<!--<class name="Animal" table="Animals" abstract="true">
+		<id name="Id">
+			<generator class="identity"/>
+		</id>
+		<discriminator column="AnimalType" type="System.String"/>
+		<property name="AllowInResturant"/>
+
+		<subclass discriminator-value="DogRules" name="Dog">
+			<property name="Bark"/>
+		</subclass>
+		<subclass discriminator-value="CatSneeze" name="Cat">
+			<property name="LastHairBall"/>
+		</subclass>
+	</class>-->
+	
+	<!--<class name="Cat"
+		   table="Cats">
+		<id name="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="AllowInResturant"/>
+
+		<property name="LastHairBall"/>
+	</class>
+
+	<class name="Dog"
+		 table="Dogs">
+		<id name="Id">
+			<generator class="identity"/>
+		</id>
+		<property name="AllowInResturant"/>
+
+		<property name="Bark"/>
+	</class>-->
+</hibernate-mapping>

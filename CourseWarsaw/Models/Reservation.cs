@@ -10,5 +10,6 @@ namespace CourseWarsaw.Models
 		public virtual string Name { get; set; }
 		public virtual DateTime From { get; set; }
 		public virtual DateTime To { get; set; }
+		public virtual string PhoneNumber { get; set; }
 	}
 }

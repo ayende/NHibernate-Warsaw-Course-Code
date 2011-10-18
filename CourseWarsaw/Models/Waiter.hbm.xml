@@ -8,5 +8,8 @@
 			<generator class="identity"/>
 		</id>
 		<property name="Name"/>
+		<dynamic-component name="Attributes">
+			<property name="SpeaksPolish" type="System.Boolean"/>
+		</dynamic-component>
 	</class>
 </hibernate-mapping>

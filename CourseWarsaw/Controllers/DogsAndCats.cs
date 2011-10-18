@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace CourseWarsaw.Controllers
 {
-	public class DogsAndCats : NHibernateController
+	public class DogsAndCatsController : NHibernateController
 	{
 		public ActionResult Create()
 		{

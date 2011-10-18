@@ -2,7 +2,7 @@
 
 namespace CourseWarsaw.Models
 {
-	public class Animal
+	public abstract class Animal
 	{
 		public virtual int Id { get; set; }
 		public virtual bool AllowInResturant { get; set; }

@@ -7,10 +7,17 @@
 		<id name="Id">
 			<generator class="identity"/>
 		</id>
+		<version name="Version" access="CourseWarsaw.Infrastructure.HiddenVersionAccessor, CourseWarsaw"/>
 		<property name="PeopleCount"/>
-		<property name="Name"/>
 		<property name="From" column="`From`"/>
 		<property name="To" column="`To`"/>
 		<many-to-one name="Table" column="`Table`"/>
+
+		<join table="CustomerPhones">
+			<key column="ReservationId"/>
+			<property name="Name"/>
+			<property name="PhoneNumber"/>
+		</join>
+		
 	</class>
 </hibernate-mapping>
