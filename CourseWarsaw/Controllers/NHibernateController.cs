@@ -22,5 +22,10 @@ namespace CourseWarsaw.Controllers
 					session.Transaction.Commit();
 			}
 		}
+
+        protected ActionResult Json(object obj)
+        {
+            return Json(obj, JsonRequestBehavior.AllowGet);
+        }
 	}
 }
