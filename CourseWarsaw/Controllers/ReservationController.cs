@@ -8,6 +8,25 @@ namespace CourseWarsaw.Controllers
 {
 	public class ReservationController : NHibernateController
 	{
+		public ActionResult Today()
+		{
+			var reservations = session.Query<Reservation>()
+				.Where(x=>DateTime.Today >= x.From && x.To <= DateTime.Today)
+				.ToList();
+
+			return Json(reservations.Select(x => new
+			{
+				x.From,
+				x.To,
+				Other = x.Table.Reservations.Select(y=> new
+				{
+					y.From,
+					y.To
+				}).ToArray(),
+				x.Name
+			}).ToArray(), JsonRequestBehavior.AllowGet);
+		}
+
 		public ActionResult Find(string name, int count, DateTime from, DateTime to)
 		{
 			var tables = session.Query<Table>()
