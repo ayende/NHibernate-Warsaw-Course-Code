@@ -1,5 +1,6 @@
 using System.Web.Mvc;
 using NHibernate;
+using NHibernate.Linq;
 
 namespace CourseWarsaw.Controllers
 {

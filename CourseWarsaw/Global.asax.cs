@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Media;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
@@ -48,7 +46,27 @@ namespace CourseWarsaw
 					properties.ConnectionStringName = Environment.MachineName;
 				})
 				.AddAssembly(Assembly.GetExecutingAssembly())
+				.SetInterceptor(new ScreamYourHeartOut())
 				.BuildSessionFactory();
+		}
+	}
+
+	public class ScreamYourHeartOut : EmptyInterceptor
+	{
+		public override NHibernate.SqlCommand.SqlString OnPrepareStatement(NHibernate.SqlCommand.SqlString sql)
+		{
+			int queryCount;
+			HttpContext.Current.Items["query-count"] = queryCount = (int) (HttpContext.Current.Items["query-count"] ?? 0) + 1;
+
+			if(queryCount > 10)
+			{
+				for (int i = 0; i < queryCount-10; i++)
+				{
+					new SoundPlayer(@"C:\Users\Ayende\scream.wav").Play();
+				}
+			}
+
+			return base.OnPrepareStatement(sql);
 		}
 	}
 }
