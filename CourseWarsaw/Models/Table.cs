@@ -8,5 +8,7 @@ namespace CourseWarsaw.Models
 		public virtual bool Priority { get; set; }
 		public virtual int Occupancy { get; set; }
 		public virtual ICollection<Reservation> Reservations { get; set; }
+
+		public virtual Money Outstanding { get; set; }
 	}
 }

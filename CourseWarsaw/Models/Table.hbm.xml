@@ -2,6 +2,9 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
 				   assembly="CourseWarsaw"
 				   namespace="CourseWarsaw.Models">
+	
+	<typedef class="CourseWarsaw.Models.MoneyType, CourseWarsaw" name="Money"/>
+	
 	<class name="Table"
 		   table="Tables">
 		<id name="Id">
@@ -13,5 +16,9 @@
 			<key column="TableId"/>
 			<many-to-many class="Reservation" column="ReservationId"/>
 		</set>
+		<property name="Outstanding" type="Money">
+			<column name="Outstanding_Currency"/>
+			<column name="Outstanding_Amount"/>
+		</property>
 	</class>
 </hibernate-mapping>

@@ -1,4 +1,5 @@
-﻿using System.Media;
+﻿using System;
+using System.Media;
 using System.Reflection;
 using System.Web;
 using System.Web.Mvc;
@@ -42,7 +43,7 @@ namespace CourseWarsaw
 			NHibernateProfiler.Initialize();
 
 			var configuration = new Configuration()
-				.SetNamingStrategy(new StayOffMyLawn())
+				//.SetNamingStrategy(new StayOffMyLawn())
 				.SetProperty(NHibernate.Cfg.Environment.Hbm2ddlAuto, "update")
 				.SetProperty(NHibernate.Cfg.Environment.Dialect, typeof(MsSql2008Dialect).AssemblyQualifiedName)
 				.DataBaseIntegration(properties =>
@@ -65,8 +66,14 @@ namespace CourseWarsaw
 			AddDynamicComponentAttribute<bool>(persistentClass, "Rude");
 			AddDynamicComponentAttribute<string>(persistentClass, "Phone");
 
+
 			SessionFactory = configuration 
 				.BuildSessionFactory();
+
+			using(var openSession = SessionFactory.OpenSession())
+			{
+				CitiesCache.Refresh(openSession.Connection);
+			}
 		}
 
 		private static void AddDynamicComponentAttribute<T>(PersistentClass persistentClass, string name)
@@ -97,10 +104,7 @@ namespace CourseWarsaw
 
 			if(queryCount > 10)
 			{
-				for (int i = 0; i < queryCount-10; i++)
-				{
-					new SoundPlayer(@"C:\Users\Ayende\scream.wav").Play();
-				}
+				Console.Beep();
 			}
 
 			return base.OnPrepareStatement(sql);

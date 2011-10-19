@@ -2,6 +2,9 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
 				   assembly="CourseWarsaw"
 				   namespace="CourseWarsaw.Models">
+
+	<typedef class="CourseWarsaw.Models.CityType, CourseWarsaw" name="CityType"/>
+	
 	<class name="Reservation"
 		   table="Reservations">
 		<id name="Id">
@@ -11,13 +14,7 @@
 		<property name="PeopleCount"/>
 		<property name="From" column="`From`"/>
 		<property name="To" column="`To`"/>
-		<many-to-one name="Table" column="`Table`"/>
 
-		<join table="CustomerPhones">
-			<key column="ReservationId"/>
-			<property name="Name"/>
-			<property name="PhoneNumber"/>
-		</join>
-		
+		<property name="City" type="CityType"/>
 	</class>
 </hibernate-mapping>

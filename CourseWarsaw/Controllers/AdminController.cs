@@ -44,12 +44,15 @@ namespace CourseWarsaw.Controllers
 
 		public ActionResult ListWaiters(int start = 0)
 		{
-			var results = session.Query<Waiter>()
-				.Skip(start * 25)
-				.Take(25)
-				.ToList();
+			for (int i = 0; i < 100; i++)
+			{
+				var results = session.Query<Waiter>()
+					.Skip(start*25)
+					.Take(25)
+					.ToList();
+			}
 
-			return Json(results, JsonRequestBehavior.AllowGet);
+			return Json(null, JsonRequestBehavior.AllowGet);
 		}
 
 		public ActionResult NewTable(bool priority)

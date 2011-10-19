@@ -8,6 +8,24 @@ namespace CourseWarsaw.Controllers
 {
 	public class ReservationController : NHibernateController
 	{
+		public ActionResult Add()
+		{
+			var reservation = new Reservation
+			{
+				From = DateTime.Now,
+				To = DateTime.Now,
+				City = new City {Id = 2}
+			};
+			session.Save(reservation);
+
+			return Json(new {done = true, reservation.Id}, JsonRequestBehavior.AllowGet);
+		}
+
+		public ActionResult Show(int id)
+		{
+			return Json(session.Get<Reservation>(id), JsonRequestBehavior.AllowGet);
+		}
+
 		public ActionResult Today()
 		{
 			var reservations = session.Query<Reservation>()

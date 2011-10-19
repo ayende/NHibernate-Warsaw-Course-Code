@@ -40,6 +40,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate">
       <HintPath>..\packages\NHibernate.3.2.0.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
@@ -76,6 +79,8 @@
     <Compile Include="Infrastructure\StayOffMyLawn.cs" />
     <Compile Include="Infrastructure\Versioned.cs" />
     <Compile Include="Models\Animal.cs" />
+    <Compile Include="Models\Money.cs" />
+    <Compile Include="Models\MoneyType.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Table.cs" />
     <Compile Include="Models\Waiter.cs" />
