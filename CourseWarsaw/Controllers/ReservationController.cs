@@ -21,6 +21,14 @@ namespace CourseWarsaw.Controllers
 			return Json(new {done = true, reservation.Id}, JsonRequestBehavior.AllowGet);
 		}
 
+		public ActionResult Edit(int id)
+		{
+			var reservation = session.Load<Reservation>(id);
+			reservation.PeopleCount++;
+
+			return Json(new { done = true, reservation.Id }, JsonRequestBehavior.AllowGet);
+		}
+
 		public ActionResult Show(int id)
 		{
 			return Json(session.Get<Reservation>(id), JsonRequestBehavior.AllowGet);

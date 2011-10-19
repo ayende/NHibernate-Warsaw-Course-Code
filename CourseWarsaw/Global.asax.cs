@@ -10,6 +10,8 @@ using HibernatingRhinos.Profiler.Appender.NHibernate;
 using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
+using NHibernate.Event;
+using NHibernate.Event.Default;
 using NHibernate.Mapping;
 using Environment = System.Environment;
 
@@ -53,6 +55,10 @@ namespace CourseWarsaw
 				.AddAssembly(Assembly.GetExecutingAssembly())
 				.SetInterceptor(new ScreamYourHeartOut());
 
+			var auditListener = new AuditListener();
+			configuration.SetListener(ListenerType.PreInsert, auditListener);
+			configuration.SetListener(ListenerType.PreUpdate, auditListener);
+
 			var persistentClass = configuration.GetClassMapping(typeof(Waiter));
 
 			//var manyToOne = new ManyToOne(persistentClass.Table);
@@ -92,6 +98,16 @@ namespace CourseWarsaw
 			};
 			component.AddProperty(property1);
 			component.Table.AddColumn(column);
+		}
+	}
+
+	public class MyInsertListner : IPreInsertEventListener
+	{
+		public bool OnPreInsert(PreInsertEvent @event)
+		{
+			if(@event.Entity is Reservation)
+				Console.Beep();
+			return false;
 		}
 	}
 
