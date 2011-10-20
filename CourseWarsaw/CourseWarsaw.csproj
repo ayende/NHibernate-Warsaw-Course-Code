@@ -80,6 +80,7 @@
     <Compile Include="Infrastructure\StayOffMyLawn.cs" />
     <Compile Include="Infrastructure\Versioned.cs" />
     <Compile Include="Models\Animal.cs" />
+    <Compile Include="Models\ChangeEvent.cs" />
     <Compile Include="Models\Money.cs" />
     <Compile Include="Models\MoneyType.cs" />
     <Compile Include="Models\Reservation.cs" />
@@ -93,7 +94,9 @@
     <EmbeddedResource Include="Models\Waiter.hbm.xml" />
     <EmbeddedResource Include="Models\Table.hbm.xml" />
     <EmbeddedResource Include="Models\Reservation.hbm.xml" />
-    <EmbeddedResource Include="Models\Animal.hbm.xml" />
+    <EmbeddedResource Include="Models\Animal.hbm.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

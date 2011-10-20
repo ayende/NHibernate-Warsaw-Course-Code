@@ -6,7 +6,7 @@
 	<typedef class="CourseWarsaw.Models.CityType, CourseWarsaw" name="CityType"/>
 
 	<!--<typedef class="CourseWarsaw.Infrastructure.HiddenPropertyAccessor, CourseWarsaw" name="hide"/>-->
-	
+
 	<class name="Reservation"
 		   table="Reservations">
 		<id name="Id">
@@ -23,6 +23,7 @@
 		<property name="CreatedBy" access="CourseWarsaw.Infrastructure.HiddenPropertyAccessor, CourseWarsaw" type="System.String"/>
 		<property name="ModifiedAt" access="CourseWarsaw.Infrastructure.HiddenPropertyAccessor, CourseWarsaw" type="System.DateTime"/>
 		<property name="ModifiedBy" access="CourseWarsaw.Infrastructure.HiddenPropertyAccessor, CourseWarsaw" type="System.String"/>
-		
+
 	</class>
+
 </hibernate-mapping>

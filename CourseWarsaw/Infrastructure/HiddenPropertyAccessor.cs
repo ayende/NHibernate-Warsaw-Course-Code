@@ -9,60 +9,43 @@ using NHibernate.Engine;
 using NHibernate.Event;
 using NHibernate.Persister.Entity;
 using NHibernate.Properties;
+using NHibernate.Type;
 
 namespace CourseWarsaw.Infrastructure
 {
-	public class AuditListener : IPreInsertEventListener, IPreUpdateEventListener
+	public class AuditListener : IPreUpdateEventListener
 	{
-		public bool OnPreInsert(PreInsertEvent @event)
-		{
-            if(@event.GetType() != typeof(Event))
-            {
-                Set("CreatedAt", DateTime.Now, @event.Persister, @event.Entity, @event.State);
-                Set("CreatedBy", WindowsIdentity.GetCurrent().Name, @event.Persister, @event.Entity, @event.State);
-            }
-			return false;
-		}
-
 		public bool OnPreUpdate(PreUpdateEvent @event)
 		{
+			using (var childSession = @event.Session.GetSession(EntityMode.Poco))
+			{
+				for (var i = 0; i < @event.Persister.PropertyNames.Length; i++)
+				{
+					if(@event.Persister.VersionProperty == i)
+						continue;
+
+					var propName = @event.Persister.PropertyNames[i];
+					IType propertyType = @event.Persister.PropertyTypes[i];
+					var same = propertyType.IsEqual(@event.OldState[i], @event.State[i], EntityMode.Poco);
+					if (same)
+						continue;
 
 
-            if (@event.GetType() != typeof(Event))
-            {
-                Set("ModifiedAt", DateTime.Now, @event.Persister, @event.Entity, @event.State);
-                Set("ModifiedBy", WindowsIdentity.GetCurrent().Name, @event.Persister, @event.Entity, @event.State);
-                
-                int i = 0;
-                foreach (var propName in @event.Persister.PropertyNames)
-                {
-                    if (@event.OldState[i] != @event.State[i])
-                    {
-                        var changeEvent = new Event
-                        {
-                            Message = string.Format("{0}#{1}.{2} at {3}",
-                                                    @event.Entity.GetType().Name,
-                                                    @event.Id,
-                                                    propName,
-                                                    DateTime.Now)
-                        };
-                        @event.Session.Save(changeEvent);
-                    }
-                    i++;
-                }
-            }
+					var changeEvent = new ChangeEvent
+					{
+						EntityName = @event.Persister.EntityName,
+						EntityId = (int)@event.Id,
+						NewValue = (@event.State[i] ?? "null").ToString(),
+						OldValue = (@event.OldState[i] ?? "null").ToString(),
+						PropertyName = propName
+					};
+					childSession.Save(changeEvent);
+				}
 
-		    return false;
-		}
+				childSession.Flush();
+			}
 
-		private void Set(string name, object val, IEntityPersister entityPersister, object entity, object[] objects)
-		{
-			var index = Array.IndexOf(entityPersister.PropertyNames, name);
-
-			entityPersister.SetPropertyValue(entity, index, val, EntityMode.Poco);
-
-			objects[index] = val;
-
+			return false;
 		}
 	}
 

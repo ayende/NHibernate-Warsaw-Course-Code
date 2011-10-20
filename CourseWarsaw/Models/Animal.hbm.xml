@@ -17,6 +17,16 @@
 		</union-subclass>
 	</class>
 
+	<class name="ChangeEvent" table="Events">
+		<id column="Id" type="System.Int32">
+			<generator class="hilo"/>
+		</id>
+		<property name="EntityName"/>
+		<property name="EntityId"/>
+		<property name="PropertyName"/>
+		<property name="OldValue"/>
+		<property name="NewValue"/>
+	</class>
 
 	<!--<class name="Animal" table="Animals" >
 		<id name="Id">

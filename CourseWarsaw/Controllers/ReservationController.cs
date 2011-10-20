@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using CourseWarsaw.Models;
+using NHibernate;
 using NHibernate.Linq;
 using System.Linq;
 

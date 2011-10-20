@@ -56,7 +56,6 @@ namespace CourseWarsaw
 				.SetInterceptor(new ScreamYourHeartOut());
 
 			var auditListener = new AuditListener();
-			configuration.SetListener(ListenerType.PreInsert, auditListener);
 			configuration.SetListener(ListenerType.PreUpdate, auditListener);
 
 			var persistentClass = configuration.GetClassMapping(typeof(Waiter));
